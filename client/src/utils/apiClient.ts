@@ -1,4 +1,4 @@
-import api from './api/$api';
+import api from '../api/$api';
 import aspida from '@aspida/axios';
 
 const apiClient = api(

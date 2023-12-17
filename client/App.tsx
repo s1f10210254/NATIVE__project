@@ -25,7 +25,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import apiClient from './src/apiCliemt';
+import apiClient from './src/utils/apiClient';
 
 type SectionProps = PropsWithChildren<{
   title: string;
