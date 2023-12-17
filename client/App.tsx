@@ -27,36 +27,6 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import apiClient from './src/utils/apiClient';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -67,17 +37,23 @@ function App(): React.JSX.Element {
   const test = 'text';
   const [test1, setTest1] = useState('これはuseStateです!');
   const [test2, setTest2] = useState('これはバックエンドから受け取る予定です');
-  const get = async () => {
-    const data = await apiClient.hi.$get().then(null);
-    setTest2(data.hello);
-  };
-  const getTest = async () => {
-    const data = await apiClient.test.$get().then(null);
-    setTest1(data.test);
+  // const get = async () => {
+  //   const data = await apiClient.hi.$get().then(null);
+  //   setTest2(data.hello);
+  // };
+  // const getTest = async () => {
+  //   const data = await apiClient.test.$get().then(null);
+  //   setTest1(data.test);
+  // };
+  const helth = async () => {
+    const data = await apiClient.health.$get().catch(null);
+    setTest1(data.hello);
+    console.log('dataaaaaaaaaa ', data.hello);
   };
   useEffect(() => {
-    getTest();
-    get();
+    // getTest();
+    // get();
+    helth();
   }, []);
   return (
     <SafeAreaView style={backgroundStyle}>
