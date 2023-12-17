@@ -25,36 +25,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+import apiClient from './src/utils/apiClient';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -63,18 +34,26 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const test = 'testです!';
+  const test = 'text';
   const [test1, setTest1] = useState('これはuseStateです!');
   const [test2, setTest2] = useState('これはバックエンドから受け取る予定です');
+  // const get = async () => {
+  //   const data = await apiClient.hi.$get().then(null);
+  //   setTest2(data.hello);
+  // };
+  // const getTest = async () => {
+  //   const data = await apiClient.test.$get().then(null);
+  //   setTest1(data.test);
+  // };
+  const helth = async () => {
+    const data = await apiClient.health.$get().catch(null);
+    setTest1(data.hello);
+    console.log('dataaaaaaaaaa ', data.hello);
+  };
   useEffect(() => {
-    axios
-      .get('http://localhost:8888/hi')
-      .then(response => {
-        setTest2(response.data.hello);
-      })
-      .catch(error => {
-        console.error('There was an error!', error);
-      });
+    // getTest();
+    // get();
+    helth();
   }, []);
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -85,7 +64,7 @@ function App(): React.JSX.Element {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Header />
+        {/* <Header /> */}
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
@@ -94,7 +73,7 @@ function App(): React.JSX.Element {
           <Text style={{textAlign: 'center'}}>{test1}</Text>
           <Text style={{textAlign: 'center'}}>{test2}</Text>
 
-          <Section title="Step One">
+          {/* <Section title="Step One">
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
             screen and then come back to see your edits.
           </Section>
@@ -106,8 +85,8 @@ function App(): React.JSX.Element {
           </Section>
           <Section title="Learn More">
             Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+          </Section> */}
+          {/* <LearnMoreLinks /> */}
         </View>
       </ScrollView>
     </SafeAreaView>

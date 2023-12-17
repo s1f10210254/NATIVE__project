@@ -1,5 +1,7 @@
 import FastifyCors from '@fastify/cors';
 import Fastify from 'fastify';
+import {hi} from './api/hi';
+import {test} from './api/test';
 
 const fastify = Fastify();
 
@@ -9,12 +11,11 @@ fastify.get('/', (req, reply) => {
   reply.send({hello: 'world'});
 });
 
-fastify.get('/hi', (req, reply) => {
-  reply.send({hello: 'how are you?'});
-});
+fastify.register(hi);
+fastify.register(test);
 
 fastify
-  .listen({port: 8888, host: '0.0.0.0'})
+  .listen({port: 31577, host: '0.0.0.0'})
   .then(address => console.log(`Server listening on ${address}`))
   .catch(err => {
     console.error(err);
