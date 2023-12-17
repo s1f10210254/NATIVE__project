@@ -5,7 +5,8 @@
  * @format
  */
 
-import React from 'react';
+import axios from 'axios';
+import React, {useEffect, useState} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -63,6 +64,18 @@ function App(): React.JSX.Element {
   };
 
   const test = 'testです!';
+  const [test1, setTest1] = useState('これはuseStateです!');
+  const [test2, setTest2] = useState('これはバックエンドから受け取る予定です');
+  useEffect(() => {
+    axios
+      .get('http://localhost:8888/hi')
+      .then(response => {
+        setTest2(response.data.hello);
+      })
+      .catch(error => {
+        console.error('There was an error!', error);
+      });
+  }, []);
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
@@ -78,6 +91,9 @@ function App(): React.JSX.Element {
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
           <Text style={{textAlign: 'center'}}>{test}</Text>
+          <Text style={{textAlign: 'center'}}>{test1}</Text>
+          <Text style={{textAlign: 'center'}}>{test2}</Text>
+
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
             screen and then come back to see your edits.
