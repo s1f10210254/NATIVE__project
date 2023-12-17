@@ -1,0 +1,13 @@
+current directory: /Users/hiroki/prog/hackathon/native/MyProject/vendor/bundle/ruby/3.0.0/gems/json-2.7.1/ext/json
+/Users/hiroki/.rbenv/versions/3.0.0/bin/ruby -I /Users/hiroki/.rbenv/versions/3.0.0/lib/ruby/3.0.0 -r ./siteconf20231217-3308-degm9c.rb extconf.rb
+creating Makefile
+
+current directory: /Users/hiroki/prog/hackathon/native/MyProject/vendor/bundle/ruby/3.0.0/gems/json-2.7.1/ext/json
+make "DESTDIR=" clean
+
+current directory: /Users/hiroki/prog/hackathon/native/MyProject/vendor/bundle/ruby/3.0.0/gems/json-2.7.1/ext/json
+make "DESTDIR="
+make: Nothing to be done for `all'.
+
+current directory: /Users/hiroki/prog/hackathon/native/MyProject/vendor/bundle/ruby/3.0.0/gems/json-2.7.1/ext/json
+make "DESTDIR=" install
