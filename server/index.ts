@@ -12,6 +12,9 @@ fastify.get('/', (req, reply) => {
 fastify.get('/hi', (req, reply) => {
   reply.send({hello: 'how are you?'});
 });
+fastify.get('/test', (req, reply) => {
+  reply.send({test: 'aaaaaaaaaaaaa'});
+});
 
 fastify
   .listen({port: 8888, host: '0.0.0.0'})

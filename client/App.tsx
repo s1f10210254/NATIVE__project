@@ -64,14 +64,19 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const test = 'testです!';
+  const test = 'text';
   const [test1, setTest1] = useState('これはuseStateです!');
   const [test2, setTest2] = useState('これはバックエンドから受け取る予定です');
   const get = async () => {
     const data = await apiClient.hi.$get().then(null);
     setTest2(data.hello);
   };
+  const getTest = async () => {
+    const data = await apiClient.test.$get().then(null);
+    setTest1(data.test);
+  };
   useEffect(() => {
+    getTest();
     get();
   }, []);
   return (
