@@ -33,27 +33,38 @@ function App(): React.JSX.Element {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-
-  const test = 'text';
   const [test1, setTest1] = useState('これはuseStateです!');
   const [test2, setTest2] = useState('これはバックエンドから受け取る予定です');
-  // const get = async () => {
-  //   const data = await apiClient.hi.$get().then(null);
-  //   setTest2(data.hello);
-  // };
+  const hi = async () => {
+    const data = await apiClient.hi.$get().then(null);
+    setTest2(data);
+    console.log('hi', data);
+  };
   // const getTest = async () => {
   //   const data = await apiClient.test.$get().then(null);
   //   setTest1(data.test);
   // };
-  const helth = async () => {
-    const data = await apiClient.health.$get().catch(null);
-    setTest1(data.hello);
-    console.log('dataaaaaaaaaa ', data.hello);
-  };
+  // const helth = async () => {
+  //   const data = await apiClient.health.$get().catch(null);
+  //   setTest1(data.hello);
+  //   console.log('dataaaaaaaaaa ', data.hello);
+  // };
+
+  // const backGet = async () => {
+  //   const data = await apiClient.test10.$get();
+  //   // setTest1(data.db);
+  // };
+  // const backGet = async () => {
+  //   const data = await apiClient.me.$get();
+  //   const result = data.email;
+  //   setTest1(result);
+  // };
+
   useEffect(() => {
     // getTest();
-    // get();
-    helth();
+    hi();
+    // helth();
+    // backGet();
   }, []);
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -69,7 +80,6 @@ function App(): React.JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Text style={{textAlign: 'center'}}>{test}</Text>
           <Text style={{textAlign: 'center'}}>{test1}</Text>
           <Text style={{textAlign: 'center'}}>{test2}</Text>
 

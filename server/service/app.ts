@@ -11,15 +11,8 @@ export const init = (serverFactory?: FastifyServerFactory) => {
   app.register(helmet);
   app.register(cors, {origin: CORS_ORIGIN, credentials: true});
 
-  // app.register(cors, {origin: true});
-
   app.register(cookie);
   server(app, {basePath: API_BASE_PATH});
 
   return app;
 };
-
-// import {init} from '$/service/app';
-// import {PORT} from '$/service/envValues';
-
-init().listen({port: PORT, host: '0.0.0.0'});

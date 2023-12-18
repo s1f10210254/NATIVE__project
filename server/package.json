@@ -4,9 +4,11 @@
   "scripts": {
     "predev": "npm run generate ",
     "dev": "run-p dev:*",
+    "dev:build": "node ./scripts/build.dev.js",
     "dev:server": "node-dev --respawn index.js",
     "dev:frourio": "frourio --watch",
     "prebuild": "npm run generate",
+    "build": "node ./scripts/build.prod.js",
     "generate": "run-p generate:*",
     "generate:frourio": "frourio",
     "start": "node --enable-source-maps index.js",
