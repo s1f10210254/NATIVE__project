@@ -21,9 +21,9 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
     },
     hi: {
       get: (option?: { config?: T | undefined } | undefined) =>
-        fetch<Methods_1yrd359['get']['resBody']>(prefix, PATH1, GET, option).json(),
+        fetch<Methods_1yrd359['get']['resBody']>(prefix, PATH1, GET, option).text(),
       $get: (option?: { config?: T | undefined } | undefined) =>
-        fetch<Methods_1yrd359['get']['resBody']>(prefix, PATH1, GET, option).json().then(r => r.body),
+        fetch<Methods_1yrd359['get']['resBody']>(prefix, PATH1, GET, option).text().then(r => r.body),
       $path: () => `${prefix}${PATH1}`,
     },
     test: {
