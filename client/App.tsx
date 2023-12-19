@@ -9,6 +9,7 @@ import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Image,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -34,16 +35,32 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const [test, setTest] = useState('これはバックエンドから受け取る予定です');
-
+  const [test, setTest] = useState('hiからくる');
   const hi = async () => {
     const data = await apiClient.hi.$get().then(null);
     setTest(data);
     console.log('hi', data);
   };
 
+  type Photo = {
+    title: string;
+    url: string;
+    description?: string;
+  };
+  type MinioResponse = {
+    photos: Photo[];
+  };
+
+  const [minioContent, setMinioContent] = useState<MinioResponse | null>(null);
+
+  const minio = async () => {
+    const minio = await apiClient.minio.$get().catch(null);
+    setMinioContent(minio);
+  };
+
   useEffect(() => {
     hi();
+    minio();
   }, []);
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -60,20 +77,18 @@ function App(): React.JSX.Element {
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
           <Text style={{textAlign: 'center'}}>{test}</Text>
+          {minioContent &&
+            minioContent.photos.map((photo, index) => (
+              <View key={index}>
+                <Text>{photo.title}</Text>
+                <Image
+                  source={{uri: photo.url}}
+                  style={{width: 100, height: 100}}
+                />
+                <Text>{photo.description}</Text>
+              </View>
+            ))}
 
-          {/* <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section> */}
           <LearnMoreLinks />
         </View>
       </ScrollView>
@@ -81,23 +96,23 @@ function App(): React.JSX.Element {
   );
 }
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+// const styles = StyleSheet.create({
+//   sectionContainer: {
+//     marginTop: 32,
+//     paddingHorizontal: 24,
+//   },
+//   sectionTitle: {
+//     fontSize: 24,
+//     fontWeight: '600',
+//   },
+//   sectionDescription: {
+//     marginTop: 8,
+//     fontSize: 18,
+//     fontWeight: '400',
+//   },
+//   highlight: {
+//     fontWeight: '700',
+//   },
+// });
 
 export default App;

@@ -7,7 +7,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "build:aspida": "aspida",
-    "watch:aspida": "aspida --watch"
+    "aspida": "aspida --watch"
   },
   "dependencies": {
     "@aspida/axios": "^1.14.0",
