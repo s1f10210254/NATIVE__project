@@ -1,4 +1,5 @@
-import type { FastifyMultipartAttachFieldsToBodyOptions, MultipartFile } from '@fastify/multipart';
+import multipart from '@fastify/multipart';
+import type { FastifyMultipartAttachFieldsToBodyOptions, Multipart, MultipartFile } from '@fastify/multipart';
 import type { ReadStream } from 'fs';
 import type { HttpStatusOk, AspidaMethodParams } from 'aspida';
 import type { Schema } from 'fast-json-stringify';
@@ -6,6 +7,8 @@ import type { z } from 'zod';
 import controllerFn_1qxyj9s from 'api/controller';
 import controllerFn_vvrvb3 from 'api/health/controller';
 import controllerFn_1c8eilo from 'api/hi/controller';
+import controllerFn_1oqu9f5 from 'api/minio/controller';
+import controllerFn_mjmxv9 from 'api/prisma/controller';
 import type { FastifyInstance, RouteHandlerMethod, preValidationHookHandler, onRequestHookHandler, preParsingHookHandler, preHandlerHookHandler } from 'fastify';
 
 export type FrourioOptions = {
@@ -88,6 +91,31 @@ export type ServerMethodHandler<T extends AspidaMethodParams,  U extends Record<
   handler: ServerHandler<T, U> | ServerHandlerPromise<T, U>;
 };
 
+const formatMultipartData = (arrayTypeKeys: [string, boolean][]): preValidationHookHandler => (req, _, done) => {
+  const body: any = req.body;
+
+  for (const [key] of arrayTypeKeys) {
+    if (body[key] === undefined) body[key] = [];
+    else if (!Array.isArray(body[key])) {
+      body[key] = [body[key]];
+    }
+  }
+
+  Object.entries(body).forEach(([key, val]) => {
+    if (Array.isArray(val)) {
+      body[key] = (val as Multipart[]).map(v => 'file' in v ? v : (v as any).value);
+    } else {
+      body[key] = 'file' in (val as Multipart) ? val : (val as any).value;
+    }
+  });
+
+  for (const [key, isOptional] of arrayTypeKeys) {
+    if (!body[key].length && isOptional) delete body[key];
+  }
+
+  done();
+};
+
 const methodToHandler = (
   methodCallback: ServerHandler<any, any>,
 ): RouteHandlerMethod => (req, reply) => {
@@ -113,12 +141,28 @@ export default (fastify: FastifyInstance, options: FrourioOptions = {}) => {
   const controller_1qxyj9s = controllerFn_1qxyj9s(fastify);
   const controller_vvrvb3 = controllerFn_vvrvb3(fastify);
   const controller_1c8eilo = controllerFn_1c8eilo(fastify);
+  const controller_1oqu9f5 = controllerFn_1oqu9f5(fastify);
+  const controller_mjmxv9 = controllerFn_mjmxv9(fastify);
+
+  fastify.register(multipart, { attachFieldsToBody: true, limits: { fileSize: 1024 ** 3 }, ...options.multipart });
 
   fastify.get(basePath || '/', methodToHandler(controller_1qxyj9s.get));
 
   fastify.get(`${basePath}/health`, asyncMethodToHandler(controller_vvrvb3.get));
 
   fastify.get(`${basePath}/hi`, methodToHandler(controller_1c8eilo.get));
+
+  fastify.get(`${basePath}/minio`, asyncMethodToHandler(controller_1oqu9f5.get));
+
+  fastify.post(
+    `${basePath}/minio`,
+    {
+      preValidation: formatMultipartData([]),
+    },
+    asyncMethodToHandler(controller_1oqu9f5.post),
+  );
+
+  fastify.get(`${basePath}/prisma`, methodToHandler(controller_mjmxv9.get));
 
   return fastify;
 };
