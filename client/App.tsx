@@ -33,38 +33,17 @@ function App(): React.JSX.Element {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-  const [test1, setTest1] = useState('これはuseStateです!');
-  const [test2, setTest2] = useState('これはバックエンドから受け取る予定です');
+
+  const [test, setTest] = useState('これはバックエンドから受け取る予定です');
+
   const hi = async () => {
     const data = await apiClient.hi.$get().then(null);
-    setTest2(data);
+    setTest(data);
     console.log('hi', data);
   };
-  // const getTest = async () => {
-  //   const data = await apiClient.test.$get().then(null);
-  //   setTest1(data.test);
-  // };
-  // const helth = async () => {
-  //   const data = await apiClient.health.$get().catch(null);
-  //   setTest1(data.hello);
-  //   console.log('dataaaaaaaaaa ', data.hello);
-  // };
-
-  // const backGet = async () => {
-  //   const data = await apiClient.test10.$get();
-  //   // setTest1(data.db);
-  // };
-  // const backGet = async () => {
-  //   const data = await apiClient.me.$get();
-  //   const result = data.email;
-  //   setTest1(result);
-  // };
 
   useEffect(() => {
-    // getTest();
     hi();
-    // helth();
-    // backGet();
   }, []);
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -75,13 +54,12 @@ function App(): React.JSX.Element {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        {/* <Header /> */}
+        <Header />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Text style={{textAlign: 'center'}}>{test1}</Text>
-          <Text style={{textAlign: 'center'}}>{test2}</Text>
+          <Text style={{textAlign: 'center'}}>{test}</Text>
 
           {/* <Section title="Step One">
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
@@ -96,7 +74,7 @@ function App(): React.JSX.Element {
           <Section title="Learn More">
             Read the docs to discover what to do next:
           </Section> */}
-          {/* <LearnMoreLinks /> */}
+          <LearnMoreLinks />
         </View>
       </ScrollView>
     </SafeAreaView>
