@@ -22,42 +22,48 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
-// node_modules/velona/dist/esm/index.js
-var depend = (dependencies, cb) => {
-  const fn = (...args) => cb(dependencies, ...args);
-  fn.inject = (deps) => typeof deps === "function" ? depend({ ...dependencies, ...deps(dependencies) }, cb) : depend({ ...dependencies, ...deps }, cb);
-  return fn;
-};
-
 // api/$relay.ts
+var import_velona = require("velona");
 var import_zod = require("zod");
 function defineController(methods, cb) {
-  return cb && typeof methods !== "function" ? depend(methods, cb) : methods;
+  return cb && typeof methods !== "function" ? (0, import_velona.depend)(methods, cb) : methods;
 }
 
 // api/controller.ts
 var controller_default = defineController(() => ({
-  get: () => ({ status: 200, body: "\u901A\u3063\u305F\u3088\u304A\u304A\u304A\u304A\u304A" })
+  get: () => ({ status: 200, body: "" })
 }));
 
+// service/prismaClient.ts
+var import_client = require("@prisma/client");
+var prismaClient = new import_client.PrismaClient();
+
 // api/health/$relay.ts
+var import_velona2 = require("velona");
 var import_zod2 = require("zod");
 function defineController2(methods, cb) {
-  return cb && typeof methods !== "function" ? depend(methods, cb) : methods;
+  return cb && typeof methods !== "function" ? (0, import_velona2.depend)(methods, cb) : methods;
 }
 
 // api/health/controller.ts
 var controller_default2 = defineController2(() => ({
-  get: () => ({ status: 200, body: { hello: "helth" } })
+  get: async () => ({
+    status: 200,
+    body: {
+      server: "ok",
+      db: await prismaClient.task.count().then(() => "ok").catch(() => "ng")
+    }
+  })
 }));
 
-// api/test/$relay.ts
+// api/hi/$relay.ts
+var import_velona3 = require("velona");
 var import_zod3 = require("zod");
 function defineController3(methods, cb) {
-  return cb && typeof methods !== "function" ? depend(methods, cb) : methods;
+  return cb && typeof methods !== "function" ? (0, import_velona3.depend)(methods, cb) : methods;
 }
 
-// api/test/controller.ts
+// api/hi/controller.ts
 var controller_default3 = defineController3(() => ({
   get: () => ({ status: 200, body: "Hello" })
 }));
@@ -69,28 +75,37 @@ var methodToHandler = (methodCallback) => (req, reply) => {
     reply.headers(data.headers);
   reply.code(data.status).send(data.body);
 };
+var asyncMethodToHandler = (methodCallback) => async (req, reply) => {
+  const data = await methodCallback(req);
+  if (data.headers !== void 0)
+    reply.headers(data.headers);
+  reply.code(data.status).send(data.body);
+};
 var server_default = (fastify, options = {}) => {
   const basePath = options.basePath ?? "";
   const controller_1qxyj9s = controller_default(fastify);
   const controller_vvrvb3 = controller_default2(fastify);
-  const controller_14za1lp = controller_default3(fastify);
+  const controller_1c8eilo = controller_default3(fastify);
   fastify.get(basePath || "/", methodToHandler(controller_1qxyj9s.get));
-  fastify.get(`${basePath}/health`, methodToHandler(controller_vvrvb3.get));
-  fastify.get(`${basePath}/test`, methodToHandler(controller_14za1lp.get));
+  fastify.get(`${basePath}/health`, asyncMethodToHandler(controller_vvrvb3.get));
+  fastify.get(`${basePath}/hi`, methodToHandler(controller_1c8eilo.get));
   return fastify;
 };
 
 // service/envValues.ts
 var import_dotenv = __toESM(require("dotenv"));
+var import_zod4 = require("zod");
 import_dotenv.default.config();
-var PORT = +(process.env.PORT ?? "8080");
-var API_BASE_PATH = process.env.API_BASE_PATH ?? "";
-var API_ORIGIN = process.env.API_ORIGIN ?? "";
-var CORS_ORIGIN = process.env.CORS_ORIGIN ?? "";
-var FIREBASE_AUTH_EMULATOR_HOST = process.env.FIREBASE_AUTH_EMULATOR_HOST;
-var FIREBASE_SERVER_KEY = process.env.FIREBASE_SERVER_KEY ?? "";
-var TWITTER_USERNAME = process.env.TWITTER_USERNAME ?? "";
-var TWITTER_PASSWORD = process.env.TWITTER_PASSWORD ?? "";
+var PORT = +import_zod4.z.string().regex(/^\d+$/).parse(process.env.PORT);
+var API_BASE_PATH = import_zod4.z.string().startsWith("/").parse(process.env.API_BASE_PATH);
+var CORS_ORIGIN = import_zod4.z.string().url().parse(process.env.CORS_ORIGIN);
+var FIREBASE_AUTH_EMULATOR_HOST = import_zod4.z.string().optional().parse(process.env.FIREBASE_AUTH_EMULATOR_HOST);
+var FIREBASE_SERVER_KEY = import_zod4.z.string().parse(process.env.FIREBASE_SERVER_KEY);
+var S3_ENDPOINT = import_zod4.z.string().parse(process.env.S3_ENDPOINT ?? "");
+var S3_BUCKET = import_zod4.z.string().parse(process.env.S3_BUCKET ?? "");
+var S3_ACCESS_KEY = import_zod4.z.string().parse(process.env.S3_ACCESS_KEY ?? "");
+var S3_SECRET_KEY = import_zod4.z.string().parse(process.env.S3_SECRET_KEY ?? "");
+var S3_REGION = import_zod4.z.string().parse(process.env.S3_REGION ?? "");
 
 // service/app.ts
 var import_cookie = __toESM(require("@fastify/cookie"));
