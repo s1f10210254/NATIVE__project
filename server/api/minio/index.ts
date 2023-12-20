@@ -4,10 +4,20 @@ export type Methods = DefineMethods<{
   get: {
     resBody: string[];
   };
+  // post: {
+  //   reqFormat: FormData;
+  //   reqBody: {
+  //     file: Blob;
+  //   };
+  //   resBody: {
+  //     url: string;
+  //   };
+  // };
+
   post: {
     reqFormat: FormData;
     reqBody: {
-      file: Blob;
+      base64: string;
     };
     resBody: {
       url: string;
