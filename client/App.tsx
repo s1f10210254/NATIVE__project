@@ -42,16 +42,7 @@ function App(): React.JSX.Element {
     console.log('hi', data);
   };
 
-  type Photo = {
-    title: string;
-    url: string;
-    description?: string;
-  };
-  type MinioResponse = {
-    photos: Photo[];
-  };
-
-  const [minioContent, setMinioContent] = useState<MinioResponse | null>(null);
+  const [minioContent, setMinioContent] = useState<string[] | null>(null);
 
   const minio = async () => {
     const minio = await apiClient.minio.$get().catch(null);
@@ -78,17 +69,13 @@ function App(): React.JSX.Element {
           }}>
           <Text style={{textAlign: 'center'}}>{test}</Text>
           {minioContent &&
-            minioContent.photos.map((photo, index) => (
-              <View key={index}>
-                <Text>{photo.title}</Text>
-                <Image
-                  source={{uri: photo.url}}
-                  style={{width: 100, height: 100}}
-                />
-                <Text>{photo.description}</Text>
-              </View>
+            minioContent.map((url, index) => (
+              <Image
+                key={index}
+                source={{uri: url}}
+                style={{width: 100, height: 100}}
+              />
             ))}
-
           <LearnMoreLinks />
         </View>
       </ScrollView>
