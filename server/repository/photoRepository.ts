@@ -7,10 +7,9 @@ export const photoRepository = {
     const command = new ListObjectsCommand({Bucket: S3_BUCKET});
     const response = await s3Client.send(command);
     return (
-      response.Contents?.map(content => ({
-        title: content.Key ?? '未定義のタイトル',
-        url: `${S3_ENDPOINT}/${S3_BUCKET}/${content.Key}`,
-      })) || []
+      response.Contents?.map(
+        content => `${S3_ENDPOINT}/${S3_BUCKET}/${content.Key}`,
+      ) || []
     );
   },
   uploadPhoto: async (file: Buffer, mimetype: string) => {

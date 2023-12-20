@@ -4,11 +4,11 @@ import {defineController} from './$relay';
 export default defineController(() => ({
   get: async () => {
     try {
-      const photos = await photoRepository.getPhotos();
-      return {status: 200, body: {photos}};
+      const urls = await photoRepository.getPhotos();
+      return {status: 200, body: urls};
     } catch (error) {
       console.error(error);
-      return {status: 500, body: {photos: []}};
+      return {status: 500, body: []};
     }
   },
   post: async ({body}) => {

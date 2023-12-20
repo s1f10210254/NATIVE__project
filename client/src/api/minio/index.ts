@@ -2,13 +2,7 @@ import type {DefineMethods} from 'aspida';
 
 export type Methods = DefineMethods<{
   get: {
-    resBody: {
-      photos: Array<{
-        title: string;
-        url: string;
-        description?: string;
-      }>;
-    };
+    resBody: string[];
   };
   post: {
     reqFormat: FormData;

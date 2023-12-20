@@ -5085,10 +5085,9 @@ var photoRepository = {
   getPhotos: async () => {
     const command = new import_client_s32.ListObjectsCommand({ Bucket: S3_BUCKET });
     const response = await s3Client.send(command);
-    return response.Contents?.map((content) => ({
-      title: content.Key ?? "\u672A\u5B9A\u7FA9\u306E\u30BF\u30A4\u30C8\u30EB",
-      url: `${S3_ENDPOINT}/${S3_BUCKET}/${content.Key}`
-    })) || [];
+    return response.Contents?.map(
+      (content) => `${S3_ENDPOINT}/${S3_BUCKET}/${content.Key}`
+    ) || [];
   },
   uploadPhoto: async (file, mimetype) => {
     const key = `photos/${Date.now()}`;
@@ -5116,11 +5115,11 @@ function defineController4(methods, cb) {
 var controller_default4 = defineController4(() => ({
   get: async () => {
     try {
-      const photos = await photoRepository.getPhotos();
-      return { status: 200, body: { photos } };
+      const urls = await photoRepository.getPhotos();
+      return { status: 200, body: urls };
     } catch (error) {
       console.error(error);
-      return { status: 500, body: { photos: [] } };
+      return { status: 500, body: [] };
     }
   },
   post: async ({ body }) => {
