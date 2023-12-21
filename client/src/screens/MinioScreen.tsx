@@ -62,6 +62,7 @@ const MinioScreen = ({navigation}: Props) => {
         body: {base64: imageBase64},
       });
       Alert.alert('アップロード成功', `URL: ${response.url}`);
+      setImageBase64(null);
       getMinioUrl();
     } catch (error) {
       console.error(error);
