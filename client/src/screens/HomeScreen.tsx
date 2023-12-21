@@ -5,6 +5,7 @@ type RootStackParamList = {
   Home: undefined;
   Other: undefined;
   Minio: undefined;
+  Test: undefined;
 };
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
@@ -22,6 +23,10 @@ const HomeScreen = ({navigation}: Props) => {
       <Button
         title="Go to Minio Screen"
         onPress={() => navigation.navigate('Minio')}
+      />
+      <Button
+        title="Go to Test Screen"
+        onPress={() => navigation.navigate('Test')}
       />
     </View>
   );
