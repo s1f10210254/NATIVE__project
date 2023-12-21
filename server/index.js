@@ -5101,6 +5101,32 @@ var photoRepository = {
     );
     const url = `${S3_ENDPOINT}/ ${S3_BUCKET}/${key}`;
     return url;
+  },
+  // uploadPhoto: async (file: Blob, mimetype: string) => {
+  //   const key = `photos/${Date.now()}`;
+  //   await s3Client.send(
+  //     new PutObjectCommand({
+  //       Bucket: S3_BUCKET,
+  //       Key: key,
+  //       Body: file,
+  //       ContentType: mimetype,
+  //     }),
+  //   );
+  //   const url = `${S3_ENDPOINT}/${S3_BUCKET}/${key}`;
+  //   return url;
+  // },
+  saveFileSomewhere: async (file) => {
+    const key = `photos/${Date.now()}-${file.name}`;
+    await s3Client.send(
+      new import_client_s32.PutObjectCommand({
+        Bucket: S3_BUCKET,
+        Key: key,
+        Body: file,
+        ContentType: file.type
+      })
+    );
+    const url = `${S3_ENDPOINT}/ ${S3_BUCKET}/${key}`;
+    return url;
   }
 };
 
@@ -5122,17 +5148,6 @@ var controller_default4 = defineController4(() => ({
       return { status: 500, body: [] };
     }
   },
-  // post: async ({body}) => {
-  //   try {
-  //     const {file} = body;
-  //     const fileBuffer = await file.toBuffer();
-  //     const url = await photoRepository.uploadPhoto(fileBuffer, file.mimetype);
-  //     return {status: 201, body: {message: 'アップロード成功', url}};
-  //   } catch (error) {
-  //     console.error(error);
-  //     return {status: 500, body: {messages: 'アップロード失敗'}};
-  //   }
-  // },
   post: async ({ body }) => {
     try {
       const { base64 } = body;
