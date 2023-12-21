@@ -4,6 +4,7 @@ import {View, Text, Button} from 'react-native';
 type RootStackParamList = {
   Home: undefined;
   Other: undefined;
+  Minio: undefined;
 };
 
 type OtherScreenNavigationProp = StackNavigationProp<

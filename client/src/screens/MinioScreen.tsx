@@ -21,8 +21,6 @@ type Props = {
 const MinioScreen = ({navigation}: Props) => {
   const [minioPhotoUrl, setMniophotoUrl] = useState<string[] | null>(null);
   const [imageBase64, setImageBase64] = useState<string | null>(null);
-  const [imageUri, setImageUri] = useState<string | null>(null); // URIを保存するためのステートを追加
-
   const selectPhoto = () => {
     const options = {
       title: 'Select Photo',
@@ -41,10 +39,6 @@ const MinioScreen = ({navigation}: Props) => {
         if (response.assets && response.assets.length > 0) {
           if (response.assets[0].uri === undefined) return;
           try {
-            // const selectedImageUri = response.assets[0].uri;
-            // if (selectedImageUri) {
-            //   setImageUri(selectedImageUri);
-            // }
             const base64 = await RNFS.readFile(
               response.assets[0].uri,
               'base64',
@@ -68,27 +62,12 @@ const MinioScreen = ({navigation}: Props) => {
         body: {base64: imageBase64},
       });
       Alert.alert('アップロード成功', `URL: ${response.url}`);
+      setImageBase64(null);
       getMinioUrl();
     } catch (error) {
       console.error(error);
       Alert.alert('アップロードに失敗しました');
     }
-    // try {
-    //   // Base64からBlobへの変換
-    //   const response = await fetch(`data:image/jpeg;base64,${imageBase64}`);
-    //   const blob = await response.blob();
-    //   //   console.log(blob, 'res');
-    //   // Blobを使用してサーバーにアップロード
-    //   const uploadResponse = await apiClient.minio.$post({
-    //     body: blob,
-    //   });
-    //   console.log('upload', uploadPhoto);
-    //   Alert.alert('アップロード成功', `URL: ${uploadResponse.url}`);
-    //   getMinioUrl();
-    // } catch (error) {
-    //   console.error(error);
-    //   Alert.alert('アップロードに失敗しました');
-    // }
   };
 
   const getMinioUrl = async () => {
