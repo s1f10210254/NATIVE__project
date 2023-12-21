@@ -25,4 +25,31 @@ export const photoRepository = {
     const url = `${S3_ENDPOINT}/ ${S3_BUCKET}/${key}`;
     return url;
   },
+  // uploadPhoto: async (file: Blob, mimetype: string) => {
+  //   const key = `photos/${Date.now()}`;
+  //   await s3Client.send(
+  //     new PutObjectCommand({
+  //       Bucket: S3_BUCKET,
+  //       Key: key,
+  //       Body: file,
+  //       ContentType: mimetype,
+  //     }),
+  //   );
+  //   const url = `${S3_ENDPOINT}/${S3_BUCKET}/${key}`;
+  //   return url;
+  // },
+
+  saveFileSomewhere: async (file: File): Promise<string> => {
+    const key = `photos/${Date.now()}-${file.name}`;
+    await s3Client.send(
+      new PutObjectCommand({
+        Bucket: S3_BUCKET,
+        Key: key,
+        Body: file,
+        ContentType: file.type,
+      }),
+    );
+    const url = `${S3_ENDPOINT}/ ${S3_BUCKET}/${key}`;
+    return url;
+  },
 };

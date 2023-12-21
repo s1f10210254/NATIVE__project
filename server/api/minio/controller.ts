@@ -12,17 +12,6 @@ export default defineController(() => ({
       return {status: 500, body: []};
     }
   },
-  // post: async ({body}) => {
-  //   try {
-  //     const {file} = body;
-  //     const fileBuffer = await file.toBuffer();
-  //     const url = await photoRepository.uploadPhoto(fileBuffer, file.mimetype);
-  //     return {status: 201, body: {message: 'アップロード成功', url}};
-  //   } catch (error) {
-  //     console.error(error);
-  //     return {status: 500, body: {messages: 'アップロード失敗'}};
-  //   }
-  // },
   post: async ({body}) => {
     try {
       const {base64} = body;

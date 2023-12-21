@@ -1,32 +1,30 @@
-import {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import apiClient from '../utils/apiClient';
+import {StackNavigationProp} from '@react-navigation/stack';
+import React from 'react';
+import {View, Button} from 'react-native';
+type RootStackParamList = {
+  Home: undefined;
+  Other: undefined;
+  Minio: undefined;
+};
 
-const HomeScreen = () => {
-  const [test, setTest] = useState('これはバックエンドから受け取る予定です');
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
-  const hi = async () => {
-    const data = await apiClient.hi.$get().then(null);
-    setTest(data);
-    console.log('hi', data);
-  };
-
-  useEffect(() => {
-    hi();
-  }, []);
+type Props = {
+  navigation: HomeScreenNavigationProp;
+};
+const HomeScreen = ({navigation}: Props) => {
   return (
-    <View style={styles.container}>
-      <Text>Home Screen</Text>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Button
+        title="Go to Other Screen"
+        onPress={() => navigation.navigate('Other')}
+      />
+      <Button
+        title="Go to Minio Screen"
+        onPress={() => navigation.navigate('Minio')}
+      />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default HomeScreen;
