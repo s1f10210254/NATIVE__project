@@ -52,7 +52,7 @@ const MapScreen = ({navigation}: Props) => {
   }, []);
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} region={position} />
+      <MapView style={styles.map} region={position} showsUserLocation={true} />
     </View>
   );
 };
