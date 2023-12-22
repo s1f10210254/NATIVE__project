@@ -1,6 +1,5 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import {StyleSheet, Text, View} from 'react-native';
-
 type RootStackParamList = {
   Home: undefined;
   AR: undefined;
