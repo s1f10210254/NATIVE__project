@@ -1,6 +1,8 @@
 import {StackNavigationProp} from '@react-navigation/stack';
-import {StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View} from 'react-native';
 import MapView from 'react-native-maps';
+import Geolocation from 'react-native-geolocation-service';
+import {useEffect, useState} from 'react';
 
 type RootStackParamList = {
   Home: undefined;
@@ -14,9 +16,43 @@ type Props = {
 };
 
 const MapScreen = ({navigation}: Props) => {
+  const [position, setPosition] = useState({
+    latitude: 37.78825,
+    longitude: -122.4324,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  });
+
+  useEffect(() => {
+    const requestLocationPermisssion = async () => {
+      if (Platform.OS === 'ios') {
+        const auth = await Geolocation.requestAuthorization('whenInUse');
+        if (auth === 'granted') {
+          Geolocation.getCurrentPosition(
+            position => {
+              setPosition({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              });
+            },
+            error => {
+              console.log(error.code, error.message);
+              // console.error(error);
+            },
+            {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+          );
+        } else {
+          console.log('Androidの処理');
+        }
+      }
+    };
+    requestLocationPermisssion();
+  }, []);
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} />
+      <MapView style={styles.map} region={position} />
     </View>
   );
 };
