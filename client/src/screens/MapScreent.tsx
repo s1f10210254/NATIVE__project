@@ -3,11 +3,7 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 import MapView from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import {useEffect, useState} from 'react';
-
-type RootStackParamList = {
-  Home: undefined;
-  Map: undefined;
-};
+import {RootStackParamList} from '../utils/ParamList';
 
 type MapScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Map'>;
 
@@ -39,7 +35,6 @@ const MapScreen = ({navigation}: Props) => {
             },
             error => {
               console.log(error.code, error.message);
-              // console.error(error);
             },
             {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
           );

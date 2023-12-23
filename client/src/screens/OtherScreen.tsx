@@ -1,11 +1,7 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
 import {View, Text, Button} from 'react-native';
-type RootStackParamList = {
-  Home: undefined;
-  Other: undefined;
-  Minio: undefined;
-};
+import {RootStackParamList} from '../utils/ParamList';
 
 type OtherScreenNavigationProp = StackNavigationProp<
   RootStackParamList,

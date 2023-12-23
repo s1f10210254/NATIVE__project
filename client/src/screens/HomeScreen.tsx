@@ -1,14 +1,7 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
 import {View, Button} from 'react-native';
-type RootStackParamList = {
-  Home: undefined;
-  Other: undefined;
-  Minio: undefined;
-  Test: undefined;
-  Map: undefined;
-  AR: undefined;
-};
+import {RootStackParamList} from '../utils/ParamList';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 

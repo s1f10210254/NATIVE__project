@@ -2,11 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import {Animated, Text, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import LinearGradient from 'react-native-linear-gradient';
-
-type RootStackParamList = {
-  Home: undefined;
-  Test: undefined;
-};
+import {RootStackParamList} from '../utils/ParamList';
 
 type TestScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Test'>;
 
