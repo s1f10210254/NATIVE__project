@@ -4,13 +4,16 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import LinearGradient from 'react-native-linear-gradient';
 import {RootStackParamList} from '../utils/ParamList';
 
-type TestScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Test'>;
+type AnimeteScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Animete'
+>;
 
 type Props = {
-  navigation: TestScreenNavigationProp;
+  navigation: AnimeteScreenNavigationProp;
 };
 
-const TestScreen = ({navigation}: Props) => {
+const AnimeteScreen = ({navigation}: Props) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const scaleAnim = useRef(new Animated.Value(0)).current;
   const moveAnim = useRef(new Animated.ValueXY({x: 0, y: 0})).current;
@@ -88,4 +91,4 @@ const TestScreen = ({navigation}: Props) => {
   );
 };
 
-export default TestScreen;
+export default AnimeteScreen;
