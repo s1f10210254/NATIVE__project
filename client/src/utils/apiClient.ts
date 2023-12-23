@@ -6,8 +6,8 @@ import api from '../api/$api';
 import aspida from '@aspida/axios';
 const apiClient = api(
   aspida(undefined, {
-    // baseURL: 'http://localhost:31577/api',
-    baseURL: 'https://armapsnsnative.onrender.com/api',
+    baseURL: 'http://localhost:31577/api',
+    // baseURL: 'https://armapsnsnative.onrender.com/api',
   }),
 );
 export default apiClient;
