@@ -4,12 +4,8 @@ import RNFS from 'react-native-fs';
 import {Alert, Button, Image, ScrollView, View} from 'react-native';
 import apiClient from '../utils/apiClient';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../utils/ParamList';
 
-type RootStackParamList = {
-  Home: undefined;
-  Other: undefined;
-  Minio: undefined;
-};
 type MinioScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   'Minio'
