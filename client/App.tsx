@@ -24,7 +24,7 @@ function App(): React.JSX.Element {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Other" component={OtherScreen} />
         <Stack.Screen name="Minio" component={MinioScreen} />
-        <Stack.Screen name="Animete" component={AnimateScreen} />
+        <Stack.Screen name="Animate" component={AnimateScreen} />
         <Stack.Screen name="Map" component={MapScreen} />
         <Stack.Screen name="AR" component={ARScreen} />
       </Stack.Navigator>

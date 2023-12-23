@@ -9,6 +9,7 @@ import controllerFn_vvrvb3 from 'api/health/controller';
 import controllerFn_1c8eilo from 'api/hi/controller';
 import controllerFn_1oqu9f5 from 'api/minio/controller';
 import controllerFn_mjmxv9 from 'api/prisma/controller';
+import controllerFn_awanum from 'api/test10/controller';
 import type { FastifyInstance, RouteHandlerMethod, preValidationHookHandler, onRequestHookHandler, preParsingHookHandler, preHandlerHookHandler } from 'fastify';
 
 export type FrourioOptions = {
@@ -143,6 +144,7 @@ export default (fastify: FastifyInstance, options: FrourioOptions = {}) => {
   const controller_1c8eilo = controllerFn_1c8eilo(fastify);
   const controller_1oqu9f5 = controllerFn_1oqu9f5(fastify);
   const controller_mjmxv9 = controllerFn_mjmxv9(fastify);
+  const controller_awanum = controllerFn_awanum(fastify);
 
   fastify.register(multipart, { attachFieldsToBody: true, limits: { fileSize: 1024 ** 3 }, ...options.multipart });
 
@@ -163,6 +165,8 @@ export default (fastify: FastifyInstance, options: FrourioOptions = {}) => {
   );
 
   fastify.get(`${basePath}/prisma`, methodToHandler(controller_mjmxv9.get));
+
+  fastify.get(`${basePath}/test10`, methodToHandler(controller_awanum.get));
 
   return fastify;
 };

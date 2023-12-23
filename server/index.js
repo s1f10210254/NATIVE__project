@@ -5062,8 +5062,6 @@ import_dotenv.default.config();
 var PORT = +import_zod4.z.string().regex(/^\d+$/).parse(process.env.PORT);
 var API_BASE_PATH = import_zod4.z.string().startsWith("/").parse(process.env.API_BASE_PATH);
 var CORS_ORIGIN = import_zod4.z.string().url().parse(process.env.CORS_ORIGIN);
-var FIREBASE_AUTH_EMULATOR_HOST = import_zod4.z.string().optional().parse(process.env.FIREBASE_AUTH_EMULATOR_HOST);
-var FIREBASE_SERVER_KEY = import_zod4.z.string().parse(process.env.FIREBASE_SERVER_KEY);
 var S3_ENDPOINT = import_zod4.z.string().parse(process.env.S3_ENDPOINT ?? "");
 var S3_BUCKET = import_zod4.z.string().parse(process.env.S3_BUCKET ?? "");
 var S3_ACCESS_KEY = import_zod4.z.string().parse(process.env.S3_ACCESS_KEY ?? "");
@@ -5174,6 +5172,18 @@ var controller_default5 = defineController5(() => ({
   get: () => ({ status: 200, body: "Hello" })
 }));
 
+// api/test10/$relay.ts
+var import_velona6 = require("velona");
+var import_zod7 = require("zod");
+function defineController6(methods, cb) {
+  return cb && typeof methods !== "function" ? (0, import_velona6.depend)(methods, cb) : methods;
+}
+
+// api/test10/controller.ts
+var controller_default6 = defineController6(() => ({
+  get: () => ({ status: 200, body: "Hello" })
+}));
+
 // $server.ts
 var formatMultipartData = (arrayTypeKeys) => (req, _, done) => {
   const body = req.body;
@@ -5216,6 +5226,7 @@ var server_default = (fastify, options = {}) => {
   const controller_1c8eilo = controller_default3(fastify);
   const controller_1oqu9f5 = controller_default4(fastify);
   const controller_mjmxv9 = controller_default5(fastify);
+  const controller_awanum = controller_default6(fastify);
   fastify.register(import_multipart.default, { attachFieldsToBody: true, limits: { fileSize: 1024 ** 3 }, ...options.multipart });
   fastify.get(basePath || "/", methodToHandler(controller_1qxyj9s.get));
   fastify.get(`${basePath}/health`, asyncMethodToHandler(controller_vvrvb3.get));
@@ -5229,6 +5240,7 @@ var server_default = (fastify, options = {}) => {
     asyncMethodToHandler(controller_1oqu9f5.post)
   );
   fastify.get(`${basePath}/prisma`, methodToHandler(controller_mjmxv9.get));
+  fastify.get(`${basePath}/test10`, methodToHandler(controller_awanum.get));
   return fastify;
 };
 
