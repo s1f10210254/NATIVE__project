@@ -5,4 +5,5 @@ export type RootStackParamList = {
   Animate: undefined;
   Map: undefined;
   AR: undefined;
+  Prisma: undefined;
 };

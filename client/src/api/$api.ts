@@ -3,6 +3,7 @@ import type { Methods as Methods_by08hd } from '.';
 import type { Methods as Methods_18qsrps } from './health';
 import type { Methods as Methods_1yrd359 } from './hi';
 import type { Methods as Methods_1bn11ry } from './minio';
+import type { Methods as Methods_1mv7pg6 } from './prisma';
 import type { Methods as Methods_curlay } from './test';
 
 const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
@@ -10,7 +11,8 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const PATH0 = '/health';
   const PATH1 = '/hi';
   const PATH2 = '/minio';
-  const PATH3 = '/test';
+  const PATH3 = '/prisma';
+  const PATH4 = '/test';
   const GET = 'GET';
   const POST = 'POST';
 
@@ -40,12 +42,19 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         fetch<Methods_1bn11ry['post']['resBody']>(prefix, PATH2, POST, option, 'FormData').json().then(r => r.body),
       $path: () => `${prefix}${PATH2}`,
     },
+    prisma: {
+      get: (option?: { config?: T | undefined } | undefined) =>
+        fetch<Methods_1mv7pg6['get']['resBody']>(prefix, PATH3, GET, option).json(),
+      $get: (option?: { config?: T | undefined } | undefined) =>
+        fetch<Methods_1mv7pg6['get']['resBody']>(prefix, PATH3, GET, option).json().then(r => r.body),
+      $path: () => `${prefix}${PATH3}`,
+    },
     test: {
       get: (option?: { config?: T | undefined } | undefined) =>
-        fetch<Methods_curlay['get']['resBody']>(prefix, PATH3, GET, option).json(),
+        fetch<Methods_curlay['get']['resBody']>(prefix, PATH4, GET, option).json(),
       $get: (option?: { config?: T | undefined } | undefined) =>
-        fetch<Methods_curlay['get']['resBody']>(prefix, PATH3, GET, option).json().then(r => r.body),
-      $path: () => `${prefix}${PATH3}`,
+        fetch<Methods_curlay['get']['resBody']>(prefix, PATH4, GET, option).json().then(r => r.body),
+      $path: () => `${prefix}${PATH4}`,
     },
     get: (option?: { config?: T | undefined } | undefined) =>
       fetch<Methods_by08hd['get']['resBody']>(prefix, '', GET, option).text(),

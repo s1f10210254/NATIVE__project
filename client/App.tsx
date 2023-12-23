@@ -15,6 +15,7 @@ import MinioScreen from './src/screens/MinioScreen';
 import MapScreen from './src/screens/MapScreent';
 import ARScreen from './src/screens/ARScreen';
 import AnimateScreen from './src/screens/AnimateScreen';
+import PrismaScreen from './src/screens/PrismaScreen';
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
@@ -27,6 +28,7 @@ function App(): React.JSX.Element {
         <Stack.Screen name="Animate" component={AnimateScreen} />
         <Stack.Screen name="Map" component={MapScreen} />
         <Stack.Screen name="AR" component={ARScreen} />
+        <Stack.Screen name="Prisma" component={PrismaScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

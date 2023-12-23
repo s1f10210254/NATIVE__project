@@ -31,6 +31,10 @@ const HomeScreen = ({navigation}: Props) => {
         title="Go to AR Screen"
         onPress={() => navigation.navigate('AR')}
       />
+      <Button
+        title="Go to Prisma Screen"
+        onPress={() => navigation.navigate('Prisma')}
+      />
     </View>
   );
 };
