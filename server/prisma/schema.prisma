@@ -14,3 +14,7 @@ model Task {
   done      Boolean
   createdAt DateTime
 }
+
+model User {
+  id String @id
+}

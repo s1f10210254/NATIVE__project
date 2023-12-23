@@ -4149,43 +4149,41 @@ var require_generateId = __commonJS({
 var require_error = __commonJS({
   "node_modules/@fastify/error/index.js"(exports, module2) {
     "use strict";
-    var { inherits, format } = require("util");
+    var { format } = require("node:util");
+    function toString() {
+      return `${this.name} [${this.code}]: ${this.message}`;
+    }
     function createError(code, message, statusCode = 500, Base = Error) {
       if (!code)
         throw new Error("Fastify error code must not be empty");
       if (!message)
         throw new Error("Fastify error message must not be empty");
       code = code.toUpperCase();
-      function FastifyError(a, b, c) {
+      !statusCode && (statusCode = void 0);
+      function FastifyError(...args) {
         if (!new.target) {
-          return new FastifyError(...arguments);
+          return new FastifyError(...args);
         }
-        Error.captureStackTrace(this, FastifyError);
-        this.name = "FastifyError";
         this.code = code;
-        switch (arguments.length) {
-          case 3:
-            this.message = format(message, a, b, c);
-            break;
-          case 2:
-            this.message = format(message, a, b);
-            break;
-          case 1:
-            this.message = format(message, a);
-            break;
-          case 0:
-            this.message = message;
-            break;
-          default:
-            this.message = format(message, ...arguments);
+        this.name = "FastifyError";
+        this.statusCode = statusCode;
+        const lastElement = args.length - 1;
+        if (lastElement !== -1 && args[lastElement] && typeof args[lastElement] === "object" && "cause" in args[lastElement]) {
+          this.cause = args.pop().cause;
         }
-        this.statusCode = statusCode || void 0;
+        this.message = format(message, ...args);
+        Error.stackTraceLimit !== 0 && Error.captureStackTrace(this, FastifyError);
       }
+      FastifyError.prototype = Object.create(Base.prototype, {
+        constructor: {
+          value: FastifyError,
+          enumerable: false,
+          writable: true,
+          configurable: true
+        }
+      });
       FastifyError.prototype[Symbol.toStringTag] = "Error";
-      FastifyError.prototype.toString = function() {
-        return `${this.name} [${this.code}]: ${this.message}`;
-      };
-      inherits(FastifyError, Base);
+      FastifyError.prototype.toString = toString;
       return FastifyError;
     }
     module2.exports = createError;
@@ -5062,8 +5060,6 @@ import_dotenv.default.config();
 var PORT = +import_zod4.z.string().regex(/^\d+$/).parse(process.env.PORT);
 var API_BASE_PATH = import_zod4.z.string().startsWith("/").parse(process.env.API_BASE_PATH);
 var CORS_ORIGIN = import_zod4.z.string().url().parse(process.env.CORS_ORIGIN);
-var FIREBASE_AUTH_EMULATOR_HOST = import_zod4.z.string().optional().parse(process.env.FIREBASE_AUTH_EMULATOR_HOST);
-var FIREBASE_SERVER_KEY = import_zod4.z.string().parse(process.env.FIREBASE_SERVER_KEY);
 var S3_ENDPOINT = import_zod4.z.string().parse(process.env.S3_ENDPOINT ?? "");
 var S3_BUCKET = import_zod4.z.string().parse(process.env.S3_BUCKET ?? "");
 var S3_ACCESS_KEY = import_zod4.z.string().parse(process.env.S3_ACCESS_KEY ?? "");
@@ -5162,6 +5158,12 @@ var controller_default4 = defineController4(() => ({
   }
 }));
 
+// repository/DbRepository.ts
+var getUser = async () => {
+  const id = prismaClient.user.findMany();
+  return id;
+};
+
 // api/prisma/$relay.ts
 var import_velona5 = require("velona");
 var import_zod6 = require("zod");
@@ -5171,6 +5173,25 @@ function defineController5(methods, cb) {
 
 // api/prisma/controller.ts
 var controller_default5 = defineController5(() => ({
+  get: async () => {
+    try {
+      const users = await getUser();
+      return { status: 200, body: users };
+    } catch (error) {
+      return { status: 500, body: [] };
+    }
+  }
+}));
+
+// api/test10/$relay.ts
+var import_velona6 = require("velona");
+var import_zod7 = require("zod");
+function defineController6(methods, cb) {
+  return cb && typeof methods !== "function" ? (0, import_velona6.depend)(methods, cb) : methods;
+}
+
+// api/test10/controller.ts
+var controller_default6 = defineController6(() => ({
   get: () => ({ status: 200, body: "Hello" })
 }));
 
@@ -5216,6 +5237,7 @@ var server_default = (fastify, options = {}) => {
   const controller_1c8eilo = controller_default3(fastify);
   const controller_1oqu9f5 = controller_default4(fastify);
   const controller_mjmxv9 = controller_default5(fastify);
+  const controller_awanum = controller_default6(fastify);
   fastify.register(import_multipart.default, { attachFieldsToBody: true, limits: { fileSize: 1024 ** 3 }, ...options.multipart });
   fastify.get(basePath || "/", methodToHandler(controller_1qxyj9s.get));
   fastify.get(`${basePath}/health`, asyncMethodToHandler(controller_vvrvb3.get));
@@ -5228,7 +5250,8 @@ var server_default = (fastify, options = {}) => {
     },
     asyncMethodToHandler(controller_1oqu9f5.post)
   );
-  fastify.get(`${basePath}/prisma`, methodToHandler(controller_mjmxv9.get));
+  fastify.get(`${basePath}/prisma`, asyncMethodToHandler(controller_mjmxv9.get));
+  fastify.get(`${basePath}/test10`, methodToHandler(controller_awanum.get));
   return fastify;
 };
 

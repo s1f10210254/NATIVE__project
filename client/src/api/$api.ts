@@ -48,9 +48,9 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
       $path: () => `${prefix}${PATH3}`,
     },
     get: (option?: { config?: T | undefined } | undefined) =>
-      fetch<Methods_by08hd['get']['resBody']>(prefix, '', GET, option).json(),
+      fetch<Methods_by08hd['get']['resBody']>(prefix, '', GET, option).text(),
     $get: (option?: { config?: T | undefined } | undefined) =>
-      fetch<Methods_by08hd['get']['resBody']>(prefix, '', GET, option).json().then(r => r.body),
+      fetch<Methods_by08hd['get']['resBody']>(prefix, '', GET, option).text().then(r => r.body),
     $path: () => `${prefix}`,
   };
 };
