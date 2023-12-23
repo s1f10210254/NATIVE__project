@@ -1,0 +1,20 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("API_DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Task {
+  id        String   @id
+  userId    String
+  label     String
+  done      Boolean
+  createdAt DateTime
+}
+
+model User {
+  id String @id
+}
