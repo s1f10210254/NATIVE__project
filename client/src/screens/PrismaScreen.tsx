@@ -28,6 +28,7 @@ const PrismaScreen = ({navigation}: Props) => {
   const getUser = async () => {
     const id = await apiClient.prisma.$get().catch(null);
     setText(id);
+    // console.log(process.env.baseURL);
   };
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const PrismaScreen = ({navigation}: Props) => {
           <Text>Database Status: {health.db}</Text>
         </View>
       )}
-
+      <Text>DB content ↓</Text>
       {text && text.map((user, index) => <Text key={index}>{user.id}</Text>)}
     </View>
   );
