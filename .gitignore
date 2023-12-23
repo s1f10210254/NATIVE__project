@@ -64,3 +64,9 @@ yarn-error.log
 
 # testing
 /coverage
+
+
+/client/.env
+/server/.env
+/server/prisma/.env
+/docker/dev/.env
