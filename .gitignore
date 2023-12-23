@@ -78,7 +78,6 @@ $*.ts
 # debug
 npm-debug.log*
 
-
 # docker
 /docker/dev/minio/
 
@@ -86,3 +85,28 @@ npm-debug.log*
 server/index.js
 server/index.js.map
 server/upload/
+
+# React Native specific
+client/android/app/build/
+client/android/app/debug/
+client/android/app/release/
+client/android/.gradle/
+client/ios/build/
+client/android/app/src/main/assets/
+client/metro.config.js
+client/metro-bundler-config.yml
+client/yarn-error.log
+client/yarn-debug.log
+client/.buckconfig
+client/.watchmanconfig
+client/.haste-cache
+client/*.iml
+client/android/.idea/
+client/android/gradlew
+client/android/gradlew.bat
+client/android/gradle/wrapper/gradle-wrapper.jar
+client/android/gradle/wrapper/gradle-wrapper.properties
+client/android/gradle.properties
+client/android/keystores/debug.keystore
+client/android/keystores/release.keystore
+client/.vscode/
