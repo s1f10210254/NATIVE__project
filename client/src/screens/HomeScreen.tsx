@@ -20,8 +20,8 @@ const HomeScreen = ({navigation}: Props) => {
         onPress={() => navigation.navigate('Minio')}
       />
       <Button
-        title="Go to Test Screen"
-        onPress={() => navigation.navigate('Test')}
+        title="Go to Animate Screen"
+        onPress={() => navigation.navigate('Animate')}
       />
       <Button
         title="Go to Map Screen"

@@ -2,7 +2,7 @@ export type RootStackParamList = {
   Home: undefined;
   Other: undefined;
   Minio: undefined;
-  Animete: undefined;
+  Animate: undefined;
   Map: undefined;
   AR: undefined;
 };
