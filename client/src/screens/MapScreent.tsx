@@ -39,7 +39,6 @@ const MapScreen = ({navigation}: Props) => {
             },
             error => {
               console.log(error.code, error.message);
-              // console.error(error);
             },
             {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
           );
