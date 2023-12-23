@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "baseUrl": "../",
-    "paths": {
-      "@backend/*": ["./serverFrourio/*"]
-    }
-  },
-  "extends": "@react-native/typescript-config/tsconfig.json"
-}
