@@ -164,7 +164,7 @@ export default (fastify: FastifyInstance, options: FrourioOptions = {}) => {
     asyncMethodToHandler(controller_1oqu9f5.post),
   );
 
-  fastify.get(`${basePath}/prisma`, methodToHandler(controller_mjmxv9.get));
+  fastify.get(`${basePath}/prisma`, asyncMethodToHandler(controller_mjmxv9.get));
 
   fastify.get(`${basePath}/test10`, methodToHandler(controller_awanum.get));
 
