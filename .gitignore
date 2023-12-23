@@ -1,0 +1,88 @@
+# OSX
+#
+.DS_Store
+
+# Xcode
+#
+client/build/
+client/*.pbxuser
+client/!default.pbxuser
+client/*.mode1v3
+client/!default.mode1v3
+client/*.mode2v3
+client/!default.mode2v3
+client/*.perspectivev3
+client/!default.perspectivev3
+client/xcuserdata
+client/*.xccheckout
+client/*.moved-aside
+client/DerivedData
+client/*.hmap
+client/*.ipa
+client/*.xcuserstate
+client/ios/.xcode.env.local
+
+# Android/IntelliJ
+#
+client/build/
+client/.idea
+client/.gradle
+client/local.properties
+client/*.iml
+client/*.hprof
+client/.cxx/
+client/*.keystore
+client/!debug.keystore
+
+# node.js
+#
+client/node_modules/
+client/npm-debug.log
+client/yarn-error.log
+
+# fastlane
+#
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output
+
+# Bundle artifact
+*.jsbundle
+
+# Ruby / CocoaPods
+client/ios/Pods/
+client/vendor/bundle/
+
+# Temporary files created by Metro to check the health of the file watcher
+client/.metro-health-check*
+
+# testing
+client/coverage
+
+
+# dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# misc
+.DS_Store
+*.pem
+tsconfig.tsbuildinfo
+*.css.d.ts
+*.css.d.ts.map
+$*.ts
+.env
+
+# debug
+npm-debug.log*
+
+
+# docker
+/docker/dev/minio/
+
+# server
+server/index.js
+server/index.js.map
+server/upload/
