@@ -20,7 +20,6 @@ const PrismaScreen = ({navigation}: Props) => {
   const [text, setText] = useState<user | null>(null);
   const getUser = async () => {
     const id = await apiClient.prisma.$get().catch(null);
-    console.log('id', id);
     setText(id);
   };
   useEffect(() => {
