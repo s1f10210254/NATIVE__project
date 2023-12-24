@@ -74,6 +74,7 @@ tsconfig.tsbuildinfo
 *.css.d.ts.map
 $*.ts
 .env
+env.d.ts
 
 # debug
 npm-debug.log*

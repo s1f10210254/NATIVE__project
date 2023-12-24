@@ -1,7 +1,6 @@
-require('dotenv').config({path: '../server/.env'});
+require('dotenv').config();
 module.exports = {
-  // input: '../serverFrourio/api',
   input: 'src/api',
-  baseURL: 'http://localhost:31577',
-  // baseURL: 'https://armapsnsnative.onrender.com',
+  // baseURL: 'http://localhost:31577',
+  baseURL: process.env.base_URL,
 };
