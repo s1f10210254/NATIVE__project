@@ -72,6 +72,7 @@ const FirebaseScreen = ({navigation}: Props) => {
     try {
       setLoginError('');
       await signInWithEmail(emailLogin, passwordLogin);
+      console.log();
     } catch (error) {
       setLoginErrorLogin('ログインに失敗しました'); // ログイン失敗時のメッセージを設定
     }
