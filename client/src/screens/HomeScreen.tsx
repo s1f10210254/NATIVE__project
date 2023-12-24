@@ -16,10 +16,6 @@ const HomeScreen = ({navigation}: Props) => {
         onPress={() => navigation.navigate('Other')}
       />
       <Button
-        title="Go to Minio Screen"
-        onPress={() => navigation.navigate('Minio')}
-      />
-      <Button
         title="Go to Animate Screen"
         onPress={() => navigation.navigate('Animate')}
       />
@@ -34,6 +30,14 @@ const HomeScreen = ({navigation}: Props) => {
       <Button
         title="Go to Prisma Screen"
         onPress={() => navigation.navigate('Prisma')}
+      />
+      <Button
+        title="Go to Minio Screen"
+        onPress={() => navigation.navigate('Minio')}
+      />
+      <Button
+        title="Go to Firebase Screen"
+        onPress={() => navigation.navigate('Firebase')}
       />
     </View>
   );

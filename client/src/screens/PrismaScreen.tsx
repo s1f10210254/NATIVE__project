@@ -17,7 +17,7 @@ const PrismaScreen = ({navigation}: Props) => {
   type user = {
     id: string;
   }[];
-  const [text, setText] = useState<user | null>(null);
+  const [DBContent, setDBContent] = useState<user | null>(null);
   const [health, setHealth] = useState<
     Record<'server' | 'db', 'ok' | 'ng'> | undefined
   >();
@@ -27,7 +27,7 @@ const PrismaScreen = ({navigation}: Props) => {
   };
   const getUser = async () => {
     const id = await apiClient.prisma.$get().catch(null);
-    setText(id);
+    setDBContent(id);
     // console.log(process.env.baseURL);
   };
 
@@ -45,7 +45,8 @@ const PrismaScreen = ({navigation}: Props) => {
         </View>
       )}
       <Text>DB content ↓</Text>
-      {text && text.map((user, index) => <Text key={index}>{user.id}</Text>)}
+      {DBContent &&
+        DBContent.map((user, index) => <Text key={index}>{user.id}</Text>)}
     </View>
   );
 };
