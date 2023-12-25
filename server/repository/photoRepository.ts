@@ -1,5 +1,5 @@
 import {S3_BUCKET, S3_ENDPOINT} from '$/service/envValues';
-import {s3Client} from '$/service/s3Client';
+import {jugiment, s3Client} from '$/service/s3Client';
 import {ListObjectsCommand, PutObjectCommand} from '@aws-sdk/client-s3';
 
 export const photoRepository = {
@@ -13,6 +13,7 @@ export const photoRepository = {
     );
   },
   uploadPhoto: async (file: Buffer, mimetype: string) => {
+    if (jugiment() === false) 'minioに対応してません';
     const key = `photos/${Date.now()}`;
     await s3Client.send(
       new PutObjectCommand({
