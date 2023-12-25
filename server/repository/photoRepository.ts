@@ -40,17 +40,17 @@ export const photoRepository = {
   //   return url;
   // },
 
-  saveFileSomewhere: async (file: File): Promise<string> => {
-    const key = `photos/${Date.now()}-${file.name}`;
+  uploadPhotoBlob: async (file: Buffer, mimetype: string) => {
+    const key = `photos/${Date.now()}`;
     await s3Client.send(
       new PutObjectCommand({
         Bucket: S3_BUCKET,
         Key: key,
         Body: file,
-        ContentType: file.type,
+        ContentType: mimetype,
       }),
     );
-    const url = `${S3_ENDPOINT}/ ${S3_BUCKET}/${key}`;
+    const url = `${S3_ENDPOINT}/${S3_BUCKET}/${key}`;
     return url;
   },
 };
