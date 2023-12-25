@@ -15,6 +15,7 @@ export default defineController(() => ({
   post: async ({body}) => {
     try {
       const {base64} = body;
+      // console.log(base64);
       const fileBuffer = Buffer.from(base64, 'base64');
       const mimetype = 'image/jpeg';
       const url = await photoRepository.uploadPhoto(fileBuffer, mimetype);
