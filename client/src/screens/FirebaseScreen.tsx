@@ -74,7 +74,7 @@ const FirebaseScreen = ({navigation}: Props) => {
       await signInWithEmail(emailLogin, passwordLogin);
       console.log();
     } catch (error) {
-      setLoginErrorLogin('ログインに失敗しました'); // ログイン失敗時のメッセージを設定
+      setLoginErrorLogin('ログインに失敗しました');
     }
   };
   return (
@@ -96,7 +96,6 @@ const FirebaseScreen = ({navigation}: Props) => {
       <Button title="新規登録" onPress={createAccount} />
       {loginError && <Text>{loginError}</Text>}
       <Text>uid:{user}</Text>
-      {/* <View> */}
       <TextInput
         style={styles.input}
         onChangeText={setEmailLogin}
@@ -114,7 +113,6 @@ const FirebaseScreen = ({navigation}: Props) => {
       <Button title="ログイン" onPress={loginEmail} />
       {loginError && <Text>{loginErrorLogin}</Text>}
       <Text>uid:{userLogin}</Text>
-      {/* </View> */}
     </View>
   );
 };
