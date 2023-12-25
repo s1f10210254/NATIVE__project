@@ -17,6 +17,8 @@ type Props = {
 const MinioScreen = ({navigation}: Props) => {
   const [minioPhotoUrl, setMniophotoUrl] = useState<string[] | null>(null);
   const [imageBase64, setImageBase64] = useState<string | null>(null);
+  const [imageUri, setImageUri] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
   const selectPhoto = () => {
     const options = {
       title: 'Select Photo',
@@ -33,12 +35,11 @@ const MinioScreen = ({navigation}: Props) => {
         console.log('ImagePicker Error: ', response.errorMessage);
       } else {
         if (response.assets && response.assets.length > 0) {
-          if (response.assets[0].uri === undefined) return;
+          const uri = response.assets[0].uri;
+          if (uri === undefined) return;
+          // setImageUri(uri);
           try {
-            const base64 = await RNFS.readFile(
-              response.assets[0].uri,
-              'base64',
-            );
+            const base64 = await RNFS.readFile(uri, 'base64');
             setImageBase64(base64);
           } catch (error) {
             Alert.alert('エラー', '画像の読み込みに失敗しました');
@@ -66,6 +67,27 @@ const MinioScreen = ({navigation}: Props) => {
     }
   };
 
+  // const uploadPhoto1 = async () => {
+  //   if (!imageUri) {
+  //     Alert.alert('写真を選択してください');
+  //     return;
+  //   }
+  //   try {
+  //     const resp = await fetch(imageUri);
+  //     const blob = await resp.blob();
+  //     console.log(blob);
+  //     const response = await apiClient.minioBlob.$post({
+  //       body: {blob: blob},
+  //     });
+  //     Alert.alert('アップロード成功', `URL: ${response}`);
+  //     setImageUri('');
+  //     getMinioUrl();
+  //   } catch (error) {
+  //     console.error(error);
+  //     Alert.alert('アップロードに失敗しました');
+  //   }
+  // };
+
   const getMinioUrl = async () => {
     const minioURL = await apiClient.minio.$get().catch(null);
     setMniophotoUrl(minioURL);
@@ -84,6 +106,9 @@ const MinioScreen = ({navigation}: Props) => {
           style={{width: 200, height: 200}}
         />
       )}
+      {/* {imageUri && (
+        <Image source={{uri: imageUri}} style={{width: 200, height: 200}} />
+      )} */}
       <Button title="アップロード" onPress={uploadPhoto} />
 
       <View style={{alignItems: 'center', justifyContent: 'center'}}>
