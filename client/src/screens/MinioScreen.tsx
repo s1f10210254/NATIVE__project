@@ -17,90 +17,7 @@ type Props = {
 };
 const MinioScreen = ({navigation}: Props) => {
   const [minioPhotoUrl, setMniophotoUrl] = useState<string[] | null>(null);
-  // const [imageBase64, setImageBase64] = useState<string | null>(null);
-  const [imageUri, setImageUri] = useState<string | null>(null);
-  // const selectPhoto = () => {
-  //   const options = {
-  //     title: 'Select Photo',
-  //     mediaType: 'photos' as MediaType,
-  //     storageOptions: {
-  //       skipBackup: true,
-  //       path: 'images',
-  //     },
-  //   };
-  //   launchImageLibrary(options, async response => {
-  //     if (response.didCancel) {
-  //       console.log('User cancelled image picker');
-  //     } else if (response.errorMessage) {
-  //       console.log('ImagePicker Error: ', response.errorMessage);
-  //     } else {
-  //       if (response.assets && response.assets.length > 0) {
-  //         const uri = response.assets[0].uri;
-  //         if (uri === undefined) return;
-  //         // setImageUri(uri);
-  //         try {
-  //           const base64 = await RNFS.readFile(uri, 'base64');
-  //           setImageBase64(base64);
-  //         } catch (error) {
-  //           Alert.alert('エラー', '画像の読み込みに失敗しました');
-  //         }
-  //       }
-  //     }
-  //   });
-  // };
-
-  // const uploadPhoto = async () => {
-  //   if (!imageBase64) {
-  //     Alert.alert('写真を選択してください');
-  //     return;
-  //   }
-  //   try {
-  //     const response = await apiClient.minio.$post({
-  //       body: {base64: imageBase64},
-  //     });
-  //     Alert.alert('アップロード成功', `URL: ${response.url}`);
-  //     setImageBase64(null);
-  //     getMinioUrl();
-  //   } catch (error) {
-  //     console.error(error);
-  //     Alert.alert('アップロードに失敗しました');
-  //   }
-  // };
-
-  // const uploadPhoto1 = async () => {
-  //   if (!imageBase64) {
-  //     Alert.alert('写真を選択してください');
-  //     return;
-  //   }
-  //   try {
-  //     // const response = await fetch(imageUri);
-  //     // const blob = await response.blob();
-  //     // const formData = new FormData();
-  //     // formData.append('file', blob);
-
-  //     const body = JSON.stringify({image: imageBase64});
-
-  //     fetch(`${base_URL}/api/upload`, {
-  //       method: 'POST',
-  //       // body: formData,
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: body,
-  //     })
-  //       .then(response => response.json())
-  //       .then(data => {
-  //         console.log('Upload Success:', data);
-  //         getMinioUrl();
-  //       })
-  //       .catch(err => {
-  //         console.error(err);
-  //       });
-  //   } catch (error) {
-  //     console.error(error);
-  //     Alert.alert('アップロードに失敗しました');
-  //   }
-  // };
+  const [select, setSelect] = useState<string | null>(null);
 
   const uploadToS3 = async (fileUrl: string, presignedUrl: string) => {
     const response = await fetch(fileUrl);
@@ -111,29 +28,37 @@ const MinioScreen = ({navigation}: Props) => {
       body: blob,
     });
   };
-  const handleUpload = async () => {
+
+  const selectPhoto = async () => {
     launchImageLibrary({mediaType: 'photo'}, async response => {
       if (!response.didCancel && response.assets && response.assets[0].uri) {
         const fileUri = response.assets[0].uri;
-        // setImageUri(fileUri);
-        const filename = fileUri.split('/').pop();
-
-        try {
-          // サーバーに署名付きURLを要求
-          const res = await fetch(
-            `${base_URL}/api/generate-presigned-url?filename=${filename}`,
-          );
-          const {url} = await res.json();
-
-          // S3にアップロード
-          await uploadToS3(fileUri, url);
-          getMinioUrl();
-          console.log('アップロード成功');
-        } catch (error) {
-          console.error('アップロード失敗', error);
-        }
+        setSelect(fileUri);
       }
     });
+  };
+  const upload = async () => {
+    if (!select) {
+      Alert.alert('写真を選択してください');
+      return;
+    }
+    const filename = select?.split('/').pop();
+    try {
+      const res = await fetch(
+        `${base_URL}/api/generate-presigned-url?filename=${filename}`,
+      );
+      const {url} = await res.json();
+
+      // S3にアップロード
+      if (select === null) return;
+      await uploadToS3(select, url);
+      setSelect('');
+      Alert.alert('アップロード成功');
+      getMinioUrl();
+      console.log('アップロード成功');
+    } catch (error) {
+      console.error('アップロード失敗', error);
+    }
   };
 
   const getMinioUrl = async () => {
@@ -147,17 +72,11 @@ const MinioScreen = ({navigation}: Props) => {
 
   return (
     <ScrollView style={{flex: 1}}>
-      {/* <Button title="写真を選択" onPress={selectPhoto} /> */}
-      {/* {imageBase64 && (
-        <Image
-          source={{uri: `data:image/jpeg;base64, ${imageBase64}`}}
-          style={{width: 200, height: 200}}
-        />
-      )} */}
-      {imageUri && (
-        <Image source={{uri: imageUri}} style={{width: 200, height: 200}} />
+      <Button title="写真を選択" onPress={selectPhoto} />
+      {select && (
+        <Image source={{uri: select}} style={{width: 200, height: 200}} />
       )}
-      <Button title="アップロード" onPress={handleUpload} />
+      <Button title="アップロード" onPress={upload} />
 
       <View style={{alignItems: 'center', justifyContent: 'center'}}>
         {minioPhotoUrl &&
