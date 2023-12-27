@@ -1,5 +1,6 @@
 import {StackNavigationProp} from '@react-navigation/stack';
-import {StyleSheet, Text, View} from 'react-native';
+import {SetStateAction, useEffect, useState} from 'react';
+import {StyleSheet, Text, View, NativeModules, Button} from 'react-native';
 type RootStackParamList = {
   Home: undefined;
   AR: undefined;
@@ -11,9 +12,19 @@ type Props = {
 };
 
 const ARScreen = ({navigation}: Props) => {
+  useEffect(() => {
+    console.log('NativeModules', NativeModules.NativeModuleAlert);
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text>AR</Text>
+      <Button
+        onPress={() =>
+          NativeModules.NativeModuleAlert.ShowAlert('Hello NativeModule!', 1)
+        }
+        title="NativeModuleAlert"
+      />
     </View>
   );
 };
