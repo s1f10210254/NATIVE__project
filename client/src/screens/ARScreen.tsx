@@ -12,8 +12,6 @@ type Props = {
 };
 
 const ARScreen = ({navigation}: Props) => {
-  const [count, setCount] = useState(0);
-
   useEffect(() => {
     console.log('NativeModules', NativeModules.NativeModuleAlert);
   }, []);
@@ -21,7 +19,6 @@ const ARScreen = ({navigation}: Props) => {
   return (
     <View style={styles.container}>
       <Text>AR</Text>
-      <Text>Count: {count}</Text>
       <Button
         onPress={() =>
           NativeModules.NativeModuleAlert.ShowAlert('Hello NativeModule!', 1)
