@@ -14,6 +14,10 @@
 		1B2A1CCBC23374E63A053DDB /* libPods-MyProject-MyProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F695400C1A78594EC4D10A31 /* libPods-MyProject-MyProjectTests.a */; };
 		2C404837E0A5AB4072FA65BD /* libPods-MyProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 958EAA23BB73F95E4B5F0B37 /* libPods-MyProject.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		F524BEF62B3C4E3F00930342 /* ARKitModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F524BEF52B3C4E3F00930342 /* ARKitModule.m */; };
+		F524BEF82B3C50C500930342 /* ARKitModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F524BEF72B3C50C500930342 /* ARKitModule.swift */; };
+		F524BEFA2B3C592A00930342 /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F524BEF92B3C592A00930342 /* ARView.swift */; };
+		F524BEFC2B3C595900930342 /* ARViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F524BEFB2B3C595900930342 /* ARViewManager.swift */; };
 		F55359262B3B65360082FB82 /* NativeModuleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55359252B3B65360082FB82 /* NativeModuleAlert.swift */; };
 		F553592B2B3B66270082FB82 /* NativeModuleAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = F553592A2B3B66270082FB82 /* NativeModuleAlert.m */; };
 /* End PBXBuildFile section */
@@ -44,6 +48,10 @@
 		A0BC4B1F10A41F7B844D07CC /* Pods-MyProject-MyProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyProject-MyProjectTests.release.xcconfig"; path = "Target Support Files/Pods-MyProject-MyProjectTests/Pods-MyProject-MyProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		B6735C88AC533E2394FD7019 /* Pods-MyProject-MyProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyProject-MyProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-MyProject-MyProjectTests/Pods-MyProject-MyProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F524BEF52B3C4E3F00930342 /* ARKitModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARKitModule.m; sourceTree = "<group>"; };
+		F524BEF72B3C50C500930342 /* ARKitModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARKitModule.swift; sourceTree = "<group>"; };
+		F524BEF92B3C592A00930342 /* ARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
+		F524BEFB2B3C595900930342 /* ARViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewManager.swift; sourceTree = "<group>"; };
 		F55359252B3B65360082FB82 /* NativeModuleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeModuleAlert.swift; sourceTree = "<group>"; };
 		F55359292B3B65D50082FB82 /* MyProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyProject-Bridging-Header.h"; sourceTree = "<group>"; };
 		F553592A2B3B66270082FB82 /* NativeModuleAlert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NativeModuleAlert.m; sourceTree = "<group>"; };
@@ -121,9 +129,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				F553592A2B3B66270082FB82 /* NativeModuleAlert.m */,
-				F55359292B3B65D50082FB82 /* MyProject-Bridging-Header.h */,
-				F55359252B3B65360082FB82 /* NativeModuleAlert.swift */,
+				F524BEEC2B3C41D500930342 /* NativeModule */,
 				13B07FAE1A68108700A75B9A /* MyProject */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* MyProjectTests */,
@@ -154,6 +160,20 @@
 				A0BC4B1F10A41F7B844D07CC /* Pods-MyProject-MyProjectTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F524BEEC2B3C41D500930342 /* NativeModule */ = {
+			isa = PBXGroup;
+			children = (
+				F553592A2B3B66270082FB82 /* NativeModuleAlert.m */,
+				F55359292B3B65D50082FB82 /* MyProject-Bridging-Header.h */,
+				F55359252B3B65360082FB82 /* NativeModuleAlert.swift */,
+				F524BEF52B3C4E3F00930342 /* ARKitModule.m */,
+				F524BEF72B3C50C500930342 /* ARKitModule.swift */,
+				F524BEF92B3C592A00930342 /* ARView.swift */,
+				F524BEFB2B3C595900930342 /* ARViewManager.swift */,
+			);
+			path = NativeModule;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -401,9 +421,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				F524BEFC2B3C595900930342 /* ARViewManager.swift in Sources */,
+				F524BEF82B3C50C500930342 /* ARKitModule.swift in Sources */,
 				F55359262B3B65360082FB82 /* NativeModuleAlert.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				F553592B2B3B66270082FB82 /* NativeModuleAlert.m in Sources */,
+				F524BEFA2B3C592A00930342 /* ARView.swift in Sources */,
+				F524BEF62B3C4E3F00930342 /* ARKitModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,7 +524,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.HIROKI.MyProject;
 				PRODUCT_NAME = MyProject;
-				SWIFT_OBJC_BRIDGING_HEADER = "MyProject-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "NativeModule/MyProject-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -529,7 +553,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.HIROKI.MyProject;
 				PRODUCT_NAME = MyProject;
-				SWIFT_OBJC_BRIDGING_HEADER = "MyProject-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "NativeModule/MyProject-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
