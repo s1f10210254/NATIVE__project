@@ -1,15 +1,7 @@
 import {StackNavigationProp} from '@react-navigation/stack';
-import {SetStateAction, useEffect, useState} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  NativeModules,
-  Button,
-  requireNativeComponent,
-  Alert,
-  ViewStyle,
-} from 'react-native';
+import {Button, NativeModules, StyleSheet, Text, View} from 'react-native';
+
+const {MySwiftModule} = NativeModules;
 type RootStackParamList = {
   Home: undefined;
   AR: undefined;
@@ -20,12 +12,16 @@ type Props = {
   navigation: ARScreenNavigationProp;
 };
 
-const ARView = requireNativeComponent('ARView');
 const ARScreen = ({navigation}: Props) => {
+  const handlePress = async () => {
+    MySwiftModule.exampleMethod((result: string) => {
+      console.log(result);
+    });
+  };
   return (
     <View style={styles.container}>
       <Text>AR</Text>
-      <ARView />
+      <Button title="Call Swift Method" onPress={handlePress} />
       <Button
         onPress={() =>
           NativeModules.NativeModuleAlert.ShowAlert('Hello NativeModule!', 1)
