@@ -17,7 +17,7 @@
 		F50261842B3DD40C00D24798 /* MySwiftModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50261832B3DD40C00D24798 /* MySwiftModule.swift */; };
 		F50261862B3DD7AB00D24798 /* MySwiftModuleBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = F50261852B3DD7AB00D24798 /* MySwiftModuleBridge.m */; };
 		F50261892B3DE8A800D24798 /* LocationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50261882B3DE8A800D24798 /* LocationModule.swift */; };
-		F502618B2B3DEA3600D24798 /* LocationModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F502618A2B3DEA3600D24798 /* LocationModule.m */; };
+		F502618B2B3DEA3600D24798 /* LocationModuleBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = F502618A2B3DEA3600D24798 /* LocationModuleBridge.m */; };
 		F524BEFA2B3C592A00930342 /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F524BEF92B3C592A00930342 /* ARView.swift */; };
 		F524BEFC2B3C595900930342 /* ARViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F524BEFB2B3C595900930342 /* ARViewManager.swift */; };
 		F55359262B3B65360082FB82 /* NativeModuleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55359252B3B65360082FB82 /* NativeModuleAlert.swift */; };
@@ -53,7 +53,7 @@
 		F50261832B3DD40C00D24798 /* MySwiftModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySwiftModule.swift; sourceTree = "<group>"; };
 		F50261852B3DD7AB00D24798 /* MySwiftModuleBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySwiftModuleBridge.m; sourceTree = "<group>"; };
 		F50261882B3DE8A800D24798 /* LocationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModule.swift; sourceTree = "<group>"; };
-		F502618A2B3DEA3600D24798 /* LocationModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationModule.m; sourceTree = "<group>"; };
+		F502618A2B3DEA3600D24798 /* LocationModuleBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationModuleBridge.m; sourceTree = "<group>"; };
 		F524BEF92B3C592A00930342 /* ARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
 		F524BEFB2B3C595900930342 /* ARViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewManager.swift; sourceTree = "<group>"; };
 		F55359252B3B65360082FB82 /* NativeModuleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeModuleAlert.swift; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				F50261882B3DE8A800D24798 /* LocationModule.swift */,
-				F502618A2B3DEA3600D24798 /* LocationModule.m */,
+				F502618A2B3DEA3600D24798 /* LocationModuleBridge.m */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -442,7 +442,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F502618B2B3DEA3600D24798 /* LocationModule.m in Sources */,
+				F502618B2B3DEA3600D24798 /* LocationModuleBridge.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				F50261862B3DD7AB00D24798 /* MySwiftModuleBridge.m in Sources */,
 				F524BEFC2B3C595900930342 /* ARViewManager.swift in Sources */,
