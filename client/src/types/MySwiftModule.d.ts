@@ -1,10 +1,9 @@
 import 'react-native';
-
-export interface exampleMethodInterface {
-  (callback: (result: string) => void): void;
-}
 declare module 'react-native' {
-  interface NativeModuleStatic {
-    exampleMethod: exampleMethodInterface;
+  interface NativeModulesStatic {
+    MySwiftModule: {
+      exampleMethod(callback: (result: string) => void): void;
+      multiply(a: number, b: number): Promise<number>;
+    };
   }
 }

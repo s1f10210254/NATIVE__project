@@ -12,7 +12,11 @@ class MySwift: NSObject{
     //処理の結果をReactNativeのtypescriptに返す
     callback([result])
   }
-
+  
+  @objc func multiply(_ a:Int, b:Int, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock){
+    let result = a * b
+    resolve(result)
+  }
   //ReactNativeがこのモジュールをメインスレッドでセットアップする必要があるかどうかを示す。
   @objc static func requiresMainQueueSetup()-> Bool{
     return true
