@@ -79,8 +79,21 @@ To learn more about React Native, take a look at the following resources:
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
 
 
+
+
+$ npm i
+$ cd clinet/ npm i
+$ cd server/ npm i
+
+$ cp server/.env.example server/.env
+$ cp docker/dev/.env.example docker/dev/.env
+clientで.env、env.d.tsファイルを作る
+
+$ docker compose up -d
+
 client
 npm run start
 
 server
 npm run dev
+
