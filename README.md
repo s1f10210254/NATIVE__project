@@ -81,19 +81,19 @@ To learn more about React Native, take a look at the following resources:
 
 
 
-$ npm i　　
-$ cd clinet/ npm i　　
-$ cd server/ npm i　　
+```$ npm i```　　
+```$ cd clinet/ npm i　　```
+```$ cd server/ npm i　　```
 
-$ cp server/.env.example server/.env　　
-$ cp docker/dev/.env.example docker/dev/.env　　
-clientで.env、env.d.tsファイルを作る　　
+```$ cp server/.env.example server/.env　　```
+```$ cp docker/dev/.env.example docker/dev/.env　　```
+```clientで.env、env.d.tsファイルを作る　　```
 
-$ docker compose up -d　　
+```$ docker compose up -d　　```
 
 client　　
-npm run start　　
+```npm run start　　```
 
 server　　
-npm run dev　　
+```npm run dev　　```
 
