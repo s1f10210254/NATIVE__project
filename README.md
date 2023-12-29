@@ -87,6 +87,7 @@ To learn more about React Native, take a look at the following resources:
 
 ```$ cp server/.env.example server/.env　　```
 ```$ cp docker/dev/.env.example docker/dev/.env　　```
+```cp server/prisma/.env.example server/prisma/.env```
 ```clientで.env、env.d.tsファイルを作る　　```
 
 ```$ docker compose up -d　　```
