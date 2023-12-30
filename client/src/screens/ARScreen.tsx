@@ -1,12 +1,9 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useState} from 'react';
 import {Button, NativeModules, StyleSheet, Text, View} from 'react-native';
+import {RootStackParamList} from '../utils/ParamList';
 
 const {LocationModule, MySwiftModule} = NativeModules;
-type RootStackParamList = {
-  Home: undefined;
-  AR: undefined;
-};
 
 type ARScreenNavigationProp = StackNavigationProp<RootStackParamList, 'AR'>;
 type Props = {
