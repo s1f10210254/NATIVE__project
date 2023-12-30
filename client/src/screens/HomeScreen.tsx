@@ -39,6 +39,10 @@ const HomeScreen = ({navigation}: Props) => {
         title="Go to Firebase Screen"
         onPress={() => navigation.navigate('Firebase')}
       />
+      <Button
+        title="Go to Swift Screen"
+        onPress={() => navigation.navigate('Swift')}
+      />
     </View>
   );
 };

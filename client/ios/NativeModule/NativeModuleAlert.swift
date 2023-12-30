@@ -29,4 +29,8 @@ class NativeModuleAlert: NSObject, RCTBridgeModule{
       alert.dismiss(animated: true, completion: nil);
     })
   }
+
+  @objc static func requiresMainQueueSetup() -> Bool {
+      return true
+    }
 }

@@ -32,4 +32,8 @@ class LocationModule: NSObject, CLLocationManagerDelegate{
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
       print("Location error: \(error)")
   }
+
+  @objc static func requiresMainQueueSetup() -> Bool {
+      return true
+  }
 }

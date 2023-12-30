@@ -7,4 +7,5 @@ export type RootStackParamList = {
   AR: undefined;
   Prisma: undefined;
   Firebase: undefined;
+  Swift: undefined;
 };
