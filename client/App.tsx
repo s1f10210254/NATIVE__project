@@ -17,6 +17,7 @@ import ARScreen from './src/screens/ARScreen';
 import AnimateScreen from './src/screens/AnimateScreen';
 import PrismaScreen from './src/screens/PrismaScreen';
 import FirebaseScreen from './src/screens/FirebaseScreen';
+import SwiftScreen from './src/screens/SwiftScreen';
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
@@ -31,6 +32,7 @@ function App(): React.JSX.Element {
         <Stack.Screen name="AR" component={ARScreen} />
         <Stack.Screen name="Prisma" component={PrismaScreen} />
         <Stack.Screen name="Firebase" component={FirebaseScreen} />
+        <Stack.Screen name="Swift" component={SwiftScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
