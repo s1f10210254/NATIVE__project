@@ -36,6 +36,12 @@ const SwiftScreen = ({navigation}: Props) => {
       <Button title="Call Swift Method" onPress={handlePress} />
       <Button title="Multiply 6 and 7" onPress={handleMultiply} />
       {result && <Text>Result: {result}</Text>}
+      <Button
+        onPress={() =>
+          NativeModules.NativeModuleAlert.ShowAlert('Hello NativeModule!', 1)
+        }
+        title="NativeModuleAlert"
+      />
     </View>
   );
 };

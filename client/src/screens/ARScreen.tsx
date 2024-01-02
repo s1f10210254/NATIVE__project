@@ -52,12 +52,6 @@ const ARScreen = ({navigation}: Props) => {
           Latitude: {location.latitude}, Longitude: {location.longitude}
         </Text>
       )}
-      <Button
-        onPress={() =>
-          NativeModules.NativeModuleAlert.ShowAlert('Hello NativeModule!', 1)
-        }
-        title="NativeModuleAlert"
-      />
     </View>
   );
 };
