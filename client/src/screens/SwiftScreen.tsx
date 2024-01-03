@@ -2,6 +2,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../utils/ParamList';
 import {Button, NativeModules, StyleSheet, Text, View} from 'react-native';
 import {useState} from 'react';
+import UnderlineBar from '../components/UnderlineBar';
 
 type SwiftScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -42,6 +43,7 @@ const SwiftScreen = ({navigation}: Props) => {
         }
         title="NativeModuleAlert"
       />
+      <UnderlineBar></UnderlineBar>
     </View>
   );
 };
